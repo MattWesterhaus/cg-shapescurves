@@ -78,7 +78,8 @@ class Renderer {
 
     // ctx:          canvas context
     drawSlide3(ctx) { 
-        var color = [0,0,100,255];
+        var n =this.num_curve_sections; 
+        var color = [(255/n*7), n*6,n*7,255];
         //M
         this.drawLine(new Point(105,400), new Point(130,500), color, ctx);
         this.drawLine(new Point(130,500), new Point(155,450), color, ctx);
@@ -112,7 +113,6 @@ class Renderer {
         this.drawLine(new Point(600,435), new Point(615,400), color, ctx);
         this.drawLine(new Point(615,400), new Point(630,470), color, ctx);
 
-        color = [255,0,0,255];
         //W
         this.drawLine(new Point(70,300), new Point(95,200), color, ctx);
         this.drawLine(new Point(95,200), new Point(120,250), color, ctx);
@@ -158,6 +158,51 @@ class Renderer {
         this.drawBezierCurve(new Point(70,130),new Point(1500,140),new Point(-700,180),new Point(630,185), [0,100,0,255], ctx);
 
 
+
+        if (this.show_points == true) {
+            this.drawCirclePrivate(new Point(105,400), 5, [0,0,0,255], ctx);
+            this.drawCirclePrivate(new Point(130,500), 5, [0,0,0,255], ctx);
+            this.drawCirclePrivate(new Point(155,450), 5, [0,0,0,255], ctx);
+            this.drawCirclePrivate(new Point(180,500), 5, [0,0,0,255], ctx);
+            this.drawCirclePrivate(new Point(205,400), 5, [0,0,0,255], ctx);
+            this.drawCirclePrivate(new Point(278,400), 5, [0,0,0,255], ctx);
+            this.drawCirclePrivate(new Point(278,415), 5, [0,0,0,255], ctx);
+            this.drawCirclePrivate(new Point(325,400), 5, [0,0,0,255], ctx);
+            this.drawCirclePrivate(new Point(300,460), 5, [0,0,0,255], ctx);
+            this.drawCirclePrivate(new Point(325,500), 5, [0,0,0,255], ctx);
+            this.drawCirclePrivate(new Point(350,465), 5, [0,0,0,255], ctx);
+            this.drawCirclePrivate(new Point(390,400), 5, [0,0,0,255], ctx);
+            this.drawCirclePrivate(new Point(390,500), 5, [0,0,0,255], ctx);
+            this.drawCirclePrivate(new Point(365,460), 5, [0,0,0,255], ctx);
+            this.drawCirclePrivate(new Point(415,465), 5, [0,0,0,255], ctx);
+            this.drawCirclePrivate(new Point(445,400), 5, [0,0,0,255], ctx);
+            this.drawCirclePrivate(new Point(445,500), 5, [0,0,0,255], ctx);
+            this.drawCirclePrivate(new Point(570,470), 5, [0,0,0,255], ctx);
+            this.drawCirclePrivate(new Point(585,400), 5, [0,0,0,255], ctx);
+            this.drawCirclePrivate(new Point(600,435), 5, [0,0,0,255], ctx);
+            this.drawCirclePrivate(new Point(615,400), 5, [0,0,0,255], ctx);
+            this.drawCirclePrivate(new Point(630,470), 5, [0,0,0,255], ctx);
+            this.drawCirclePrivate(new Point(70,300), 5, [0,0,0,255], ctx);
+            this.drawCirclePrivate(new Point(95,200), 5, [0,0,0,255], ctx);
+            this.drawCirclePrivate(new Point(120,250), 5, [0,0,0,255], ctx);
+            this.drawCirclePrivate(new Point(145,200), 5, [0,0,0,255], ctx);
+            this.drawCirclePrivate(new Point(170,300), 5, [0,0,0,255], ctx);
+            this.drawCirclePrivate(new Point(305,200), 5, [0,0,0,255], ctx);
+            this.drawCirclePrivate(new Point(305,300), 5, [0,0,0,255], ctx);
+            this.drawCirclePrivate(new Point(280,260), 5, [0,0,0,255], ctx);
+            this.drawCirclePrivate(new Point(330,265), 5, [0,0,0,255], ctx);
+            this.drawCirclePrivate(new Point(445,200), 5, [0,0,0,255], ctx);
+            this.drawCirclePrivate(new Point(390,260), 5, [0,0,0,255], ctx);
+            this.drawCirclePrivate(new Point(390,200), 5, [0,0,0,255], ctx);
+            this.drawCirclePrivate(new Point(445,200), 5, [0,0,0,255], ctx);
+            this.drawCirclePrivate(new Point(445,300), 5, [0,0,0,255], ctx);
+            this.drawCirclePrivate(new Point(543,215), 5, [0,0,0,255], ctx);
+            this.drawCirclePrivate(new Point(543,200), 5, [0,0,0,255], ctx);
+            this.drawCirclePrivate(new Point(610,200), 5, [0,0,0,255], ctx);
+            this.drawCirclePrivate(new Point(610,260), 5, [0,0,0,255], ctx);
+
+        }
+
     }
 
     // left_bottom:  object ({x: __, y: __})
@@ -165,8 +210,8 @@ class Renderer {
     // color:        array of int [R, G, B, A]
     // ctx:          canvas context
     drawRectangle(left_bottom, right_top, color, ctx) {
-        var n =this.num_curve_sections;
-        color = [n*6, 255 - Math.pow(n,n) % 255, 255- n*7,255];
+        var n =this.num_curve_sections; 
+        color = [(255/n*7), n*6,n*7,255];
         var right_bottom = new Point(right_top.x, left_bottom.y);
         var left_top = new Point(left_bottom.x, right_top.y);
 
@@ -251,10 +296,6 @@ class Renderer {
     // color:        array of int [R, G, B, A]
     // ctx:          canvas context
     drawBezierCurve(pt0, pt1, pt2, pt3, color, ctx) {
-        // var newColor = [0,0,0,100];
-        // this.drawLine(pt0, pt1, newColor, ctx);
-        // this.drawLine(pt1, pt2, newColor, ctx);
-        // this.drawLine(pt2, pt3, newColor, ctx);
         var i = 1/this.num_curve_sections; 
         var n =this.num_curve_sections; 
         color = [(255/n*7), n*6,n*7,255];
@@ -271,6 +312,7 @@ class Renderer {
 
             if (this.show_points == true) {
                 this.drawCirclePrivate(point1, 5, [0,0,0,255], ctx);
+                this.drawCirclePrivate(point2, 5, [0,0,0,255], ctx);
             }
         }
     }
